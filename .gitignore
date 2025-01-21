@@ -8,6 +8,8 @@ node_modules/
 dist/
 web-build/
 expo-env.d.ts
+google-services.json
+sdk-fbsvc-4cee1e2b07.json
 
 # Native
 *.orig.*
