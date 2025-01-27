@@ -3,7 +3,7 @@ import React from 'react'
 import { Link, router, Stack } from 'expo-router'
 import Ionicons from '@expo/vector-icons/Ionicons'
 
-const _layout = () => {
+const Layout = () => {
     return (
         <Stack screenOptions={{
             headerShown: true,
@@ -15,4 +15,4 @@ const _layout = () => {
     )
 }
 
-export default _layout
+export default Layout

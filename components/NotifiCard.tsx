@@ -1,31 +1,63 @@
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
-import React from 'react'
+import Checkbox from 'expo-checkbox';
+import React, { useState } from 'react'
 import { Link, router } from 'expo-router'
 
-const NotifiCard = () => {
+type Prop = {
+    title: String,
+    date: String,
+    body: String,
+    index: Number
+}
+
+const NotifiCard = ({ title, date, body, index }: Prop) => {
+    const [isChecked, setChecked] = useState(false);
     return (
-        <TouchableOpacity style={styles.container} onPress={()=>router.push("/notification/1")}>
-            <Text style={styles.title}>Notification</Text>
-            <Text style={styles.description} numberOfLines={2}>
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempore vitae obcaecati, quisquam, dicta itaque quam, blanditiis voluptatum eius vero fugit laudantium! Itaque ratione accusamus beatae neque placeat. Labore, fugiat voluptatem?
-            </Text>
+        <TouchableOpacity style={styles.container} onPress={() => router.push(`/notification/${index}`)}>
+            
+            <View style={{flex:1}}>
+                <Text style={styles.title}>{title}</Text>
+                <Text style={styles.description} numberOfLines={2}>
+                    {body}
+                </Text>
+                <View style={styles.line} />
+                <Text style={styles.date}>{date}</Text>
+            </View>
+
+            <Checkbox style={styles.checkbox} value={isChecked} onValueChange={setChecked} />
         </TouchableOpacity>
     )
 }
 
 const styles = StyleSheet.create({
     container: {
+        flex:1,
         padding: 20,
         backgroundColor: "#fff",
-        borderRadius: 16
+        borderRadius: 16,
+        flexDirection:"row",
+        alignItems:"center",
     },
     title: {
-        fontSize: 16,
+        fontSize: 18,
         fontWeight: "600"
     },
+    line: {
+        borderTopWidth: StyleSheet.hairlineWidth,
+        marginTop: 10,
+        opacity: 0.5
+    },
     description: {
+        fontSize: 16,
+    },
+    date: {
         fontSize: 14,
-    }
+        opacity: 0.7,
+        textAlign: "right",
+    },
+    checkbox: {
+        margin: 8,
+      },
 })
 
 export default NotifiCard

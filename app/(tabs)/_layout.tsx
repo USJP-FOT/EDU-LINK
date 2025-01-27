@@ -4,8 +4,7 @@ import { Platform, TouchableOpacity } from 'react-native';
 import { Colors } from '@/constants/Colors';
 import { useColorScheme } from '@/hooks/useColorScheme';
 import Ionicons from '@expo/vector-icons/Ionicons';
-import MaterialIcons from '@expo/vector-icons/MaterialIcons';
-import Octicons from '@expo/vector-icons/Octicons';
+import AntDesign from '@expo/vector-icons/AntDesign';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 
 export default function TabLayout() {
@@ -44,7 +43,7 @@ export default function TabLayout() {
         title: 'Student Registration',
         tabBarLabel: "Registration",
         tabBarIcon: ({ color, size }) => (
-          <Octicons name="diff-added" size={size} color={color} />
+          <AntDesign name="adduser" size={size} color={color} />
         ),
       }}
     />
