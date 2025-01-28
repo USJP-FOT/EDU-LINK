@@ -21,12 +21,13 @@ export const storeData = async (value: any, key: string): Promise<any> => {
     }
 };
 
-export const getData = async (key: string): Promise<any | null> => {
+export const getData = async (key: string)=> {
     try {
         if (!key) throw new Error("Key is required and cannot be empty.");
-
         const jsonValue = await AsyncStorage.getItem(key);
-        return jsonValue != null ? JSON.parse(jsonValue) : null;
+        if(jsonValue){
+            return await JSON.parse(jsonValue)
+        }
     } catch (e) {
         console.error("Error in getData:", e);
     }

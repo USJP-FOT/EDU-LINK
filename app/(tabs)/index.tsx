@@ -6,7 +6,7 @@ import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { registerForPushNotificationsAsync, sendPushNotification } from '@/lib/PushNotification';
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
 import * as Notifications from 'expo-notifications';
-import { storeData } from '@/lib/Storage';
+import { removeValue, storeData } from '@/lib/Storage';
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
