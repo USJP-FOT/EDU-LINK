@@ -7,7 +7,7 @@ export async function sendPushNotification(expoPushToken: string) {
   const message = {
     to: expoPushToken,
     sound: 'default',
-    title: '6',
+    title: '7',
     body: 'MADE BY THILINA JAYAMAL',
     data: { someData: 'goes here' },
   };

@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-export const storeData = async (value: any, key: string): Promise<any> => {
+export const storeData = async (value: any, key: string) => {
     try {
         if (!key) throw new Error("Key is required and cannot be empty.");
 
@@ -10,7 +10,7 @@ export const storeData = async (value: any, key: string): Promise<any> => {
         if (!Array.isArray(response)) {
             data = [value];
         } else {
-            data = [value,...response];
+            data = [value, ...response];
         }
 
         const jsonValue = JSON.stringify(data);
@@ -21,11 +21,11 @@ export const storeData = async (value: any, key: string): Promise<any> => {
     }
 };
 
-export const getData = async (key: string)=> {
+export const getData = async (key: string) => {
     try {
         if (!key) throw new Error("Key is required and cannot be empty.");
         const jsonValue = await AsyncStorage.getItem(key);
-        if(jsonValue){
+        if (jsonValue) {
             return await JSON.parse(jsonValue)
         }
     } catch (e) {
@@ -33,11 +33,27 @@ export const getData = async (key: string)=> {
     }
 };
 
-export const removeValue = async (key:string) => {
+export const removeValue = async (key: string) => {
     try {
-      await AsyncStorage.removeItem(key)
-    } catch(e) {
-      console.log(e)
+        await AsyncStorage.removeItem(key)
+    } catch (e) {
+        console.log(e)
     }
     console.log('Done.')
-  }
+}
+
+export const deleteByIndex = async (key: string, index: number) => {
+    try {
+        const response = await getData(key);
+
+        if (!Array.isArray(response)) {
+            return
+        } else {
+            const removed = response.splice(index, 1);
+            const jsonValue = JSON.stringify(response);
+            await AsyncStorage.setItem(key, jsonValue);
+        }
+    } catch (error) {
+        console.log(error)
+    }
+}

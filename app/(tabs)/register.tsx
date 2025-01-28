@@ -28,9 +28,6 @@ const create = () => {
   const handlePresentModalPress = useCallback(() => {
     bottomSheetModalRef.current?.present();
   }, []);
-  const handleSheetChanges = useCallback((index: number) => {
-    console.log('handleSheetChanges', index);
-  }, []);
 
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -86,7 +83,6 @@ const create = () => {
       <BottomSheetModalProvider>
         <BottomSheetModal
           ref={bottomSheetModalRef}
-          onChange={handleSheetChanges}
           snapPoints={snapPoints}
         >
           <BottomSheetView style={styles.contentContainer}>

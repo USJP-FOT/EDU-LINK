@@ -5,14 +5,15 @@ import { Link, router } from 'expo-router'
 import Entypo from '@expo/vector-icons/Entypo';
 
 type Prop = {
-    title: String,
-    date: String,
-    body: String,
-    index: Number,
-    onPress:()=>void,
+    title: string,
+    date: string,
+    body: string,
+    index: number,
+    onPress: () => void,
+    setActive: (index: number) => void
 }
 
-const NotifiCard = ({ title, date, body, index,onPress}: Prop) => {
+const NotifiCard = ({ title, date, body, index, onPress, setActive }: Prop) => {
     return (
         <TouchableOpacity style={styles.container} onPress={() => router.push(`/notification/${index}`)}>
 
@@ -24,7 +25,10 @@ const NotifiCard = ({ title, date, body, index,onPress}: Prop) => {
                 <Text style={styles.date}>{date}</Text>
             </View>
 
-            <TouchableOpacity style={styles.option} onPress={onPress}>
+            <TouchableOpacity style={styles.option} onPress={() => {
+                onPress()
+                setActive(index)
+            }}>
                 <Entypo name="dots-three-horizontal" size={24} color="black" />
             </TouchableOpacity>
         </TouchableOpacity>
@@ -58,7 +62,7 @@ const styles = StyleSheet.create({
     date: {
         fontSize: 14,
         opacity: 0.6,
-        fontWeight:"600",
+        fontWeight: "600",
         textAlign: "left",
     },
     checkbox: {
