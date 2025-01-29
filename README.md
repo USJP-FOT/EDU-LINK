@@ -24,12 +24,12 @@ Ensure you have the following installed:
    git clone https://github.com/USJP-FOT/EDU-LINK.git
    cd EDU-LINK
    ```
-2. Install frontend dependencies:
+2. Install EDU-LINK dependencies:
    ```sh
    cd frontend
    npm install
    ```
-3. Start the frontend:
+3. Start the EDU-LINK:
    ```sh
    npm start
    ```
