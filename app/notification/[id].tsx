@@ -30,7 +30,7 @@ const DisplayNotification = () => {
       <Text style={styles.description}>
         {bodyTxt}
       </Text>
-      <Text>{date}</Text>
+      <Text style={styles.date}>{date}</Text>
     </View>
   )
 }
@@ -42,11 +42,17 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff"
   },
   title: {
-    fontSize: 20,
-    fontWeight: "600"
+    fontSize: 28,
+    fontWeight: "500",
+    marginBottom:10
   },
   description: {
-    fontSize: 16,
+    fontSize: 20,
+    opacity:0.8
+  },
+  date:{
+    fontSize:16,
+    marginTop:15
   }
 })
 

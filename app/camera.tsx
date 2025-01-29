@@ -69,7 +69,7 @@ export default function Camera() {
                 !image ?
                     (
                         <View>
-                            <CameraView style={{ width: (width - 40), height: (width - 20), borderRadius: 15 }} facing={"back"} ref={cameraRef} animateShutter={true} enableTorch={true} />
+                            <CameraView style={{ width: (width - 40), height: (width - 20), borderRadius: 15 }} pictureSize='1:1' facing={facing} ref={cameraRef} animateShutter={true} enableTorch={flash} />
                             <View style={styles.buttonContainer}>
 
                                 <TouchableOpacity style={styles.cbutton} onPress={toggleCameraFacing}>
@@ -81,7 +81,7 @@ export default function Camera() {
                                 </TouchableOpacity>
 
                                 <TouchableOpacity style={styles.cbutton} onPress={() => setFlash(!flash)}>
-                                    <Entypo name="flashlight" size={34} color="black" />
+                                    <Entypo name="flashlight" size={34} color={flash ? "#2e86c1" : "black"} />
                                 </TouchableOpacity>
 
                             </View>
@@ -92,15 +92,15 @@ export default function Camera() {
                     (
                         <View>
                             <Image source={{ uri: image }} style={{ width: width - 40, height: width - 20, borderRadius: 15 }} />
-                            <View style={{ flexDirection: 'row', gap: 30, width: '100%', justifyContent: 'center',marginTop:20 }}>
+                            <View style={{ flexDirection: 'row', gap: 30, width: '100%', justifyContent: 'center', marginTop: 20 }}>
 
                                 <TouchableOpacity style={styles.btn} onPress={sendImage}>
                                     <Text style={styles.text}>OK</Text>
                                 </TouchableOpacity>
 
 
-                                <TouchableOpacity style={styles.btn} onPress={() => setImage(null)}>
-                                    <Text style={styles.text}>Retry</Text>
+                                <TouchableOpacity style={[styles.btn,{backgroundColor:"gray"}]} onPress={() => setImage(null)}>
+                                    <Text style={[styles.text]}>Retry</Text>
                                 </TouchableOpacity>
 
                             </View>
@@ -126,9 +126,9 @@ const styles = StyleSheet.create({
     buttonContainer: {
         flexDirection: 'row',
         justifyContent: 'center',
-        gap:20,
+        gap: 20,
         alignItems: 'center',
-        marginTop:-30
+        marginTop: -30
 
     },
     cbutton: {
@@ -143,14 +143,14 @@ const styles = StyleSheet.create({
     btn: {
         paddingVertical: 10,
         paddingHorizontal: 30,
-        backgroundColor:"#2e86c1",
-        borderRadius:15,
-        flex:1
+        backgroundColor: "#2e86c1",
+        borderRadius: 30,
+        flex: 1
     },
     text: {
         fontSize: 18,
         fontWeight: '400',
         color: 'white',
-        textAlign:"center"
+        textAlign: "center"
     },
 });

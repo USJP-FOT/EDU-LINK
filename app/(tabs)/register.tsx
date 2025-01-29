@@ -68,13 +68,13 @@ const create = () => {
 
           </View>
 
-          <TextInput placeholder='Full Name' style={{ backgroundColor: '#eaeaea', borderRadius: 15, padding: 15, fontFamily: 'Poppins' }} />
-          <TextInput placeholder='Email' style={{ backgroundColor: '#eaeaea', borderRadius: 15, padding: 15, fontFamily: 'Poppins' }} />
-          <TextInput placeholder='Contact Number' style={{ backgroundColor: '#eaeaea', borderRadius: 15, padding: 15, fontFamily: 'Poppins' }} />
-          <TextInput placeholder='Accadamic Year' style={{ backgroundColor: '#eaeaea', borderRadius: 15, padding: 15, fontFamily: 'Poppins' }} />
+          <TextInput placeholder='Full Name' style={{ backgroundColor: '#fff', borderRadius: 15, padding: 15, fontFamily: 'Poppins' }} />
+          <TextInput placeholder='Email' style={{ backgroundColor: '#fff', borderRadius: 15, padding: 15, fontFamily: 'Poppins' }} />
+          <TextInput placeholder='Contact Number' style={{ backgroundColor: '#fff', borderRadius: 15, padding: 15, fontFamily: 'Poppins' }} />
+          <TextInput placeholder='Accadamic Year' style={{ backgroundColor: '#fff', borderRadius: 15, padding: 15, fontFamily: 'Poppins' }} />
         </KeyboardAvoidingView>
         
-        <TouchableOpacity style={{ padding: 15, flexDirection: 'row', backgroundColor: '#2e86c1', justifyContent: 'center', alignItems: 'center', borderRadius: 15, marginTop: 20 }}>
+        <TouchableOpacity style={{ padding: 15, flexDirection: 'row', backgroundColor: '#2e86c1', justifyContent: 'center', alignItems: 'center', borderRadius: 40, marginTop: 20 }}>
           <Text style={{ color: 'white', fontSize: 16, fontWeight: '600', fontFamily: 'Poppins' }}>REGISTER</Text>
         </TouchableOpacity>
 

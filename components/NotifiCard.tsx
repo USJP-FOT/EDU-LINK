@@ -1,5 +1,4 @@
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
-import Checkbox from 'expo-checkbox';
 import React, { useState } from 'react'
 import { Link, router } from 'expo-router'
 import Entypo from '@expo/vector-icons/Entypo';

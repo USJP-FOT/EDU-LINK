@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { View, Text, ScrollView, Pressable, StyleSheet, TouchableOpacity } from 'react-native';
-import { data } from "../../data";
-import { Link } from 'expo-router';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { Link, router } from 'expo-router';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { registerForPushNotificationsAsync, sendPushNotification } from '@/lib/PushNotification';
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
@@ -57,7 +56,7 @@ const App = () => {
             <AnimatedCircularProgress
               size={120}
               width={12}
-              fill={75}
+              fill={78}
               tintColor="#2ecc71"
               onAnimationComplete={() => console.log('onAnimationComplete')}
               backgroundColor="#e5e7e9">
@@ -85,7 +84,7 @@ const App = () => {
         </View>
       </View>
 
-      <TouchableOpacity style={styles.btn} onPress={() => sendPushNotification(expoPushToken)}>
+      <TouchableOpacity style={styles.btn} onPress={() => router.push("/notice")}>
         <FontAwesome name="send-o" size={24} color="#fff" />
         <Text style={styles.btnTxt}>Send notice</Text>
       </TouchableOpacity>
@@ -102,7 +101,7 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 20,
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
   },
   cardDesc: {
     textAlign: "center",
@@ -111,12 +110,13 @@ const styles = StyleSheet.create({
   },
   btn: {
     backgroundColor: "#2e86c1",
-    padding: 15,
+    paddingVertical: 15,
+    paddingHorizontal:35,
     flexDirection: "row",
     gap: 10,
     justifyContent: "center",
     alignItems: "center",
-    borderRadius: 15
+    borderRadius: 40
   },
   btnTxt: {
     color: "#fff",

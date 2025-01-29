@@ -1,21 +1,17 @@
 import { router, Tabs } from 'expo-router';
 import React from 'react';
 import { Platform, TouchableOpacity } from 'react-native';
-import { Colors } from '@/constants/Colors';
-import { useColorScheme } from '@/hooks/useColorScheme';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import AntDesign from '@expo/vector-icons/AntDesign';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 
 export default function TabLayout() {
-  const colorScheme = useColorScheme();
 
   return (
     <Tabs
     screenOptions={{
-      tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
+      tabBarActiveTintColor: "#2e86c1",
       headerShown: true,
-      tabBarAllowFontScaling:false,
       tabBarHideOnKeyboard:true,
       headerTitleAlign: "center",
       tabBarStyle: Platform.select({

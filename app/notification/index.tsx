@@ -46,9 +46,9 @@ const Notification = () => {
         {
           (notification?.length > 0) && (
             <TouchableOpacity onPress={clearNotifications}
-              style={{ paddingHorizontal: 20, flexDirection: "row", justifyContent: "center", alignItems: "center", gap: 8, borderWidth: 2, borderColor: "red", padding: 6, borderRadius: 30 }}>
-              <AntDesign name="delete" size={30} color="red" />
-              <Text style={{ fontSize: 16, fontWeight: "600", opacity: 0.7 }}>Clear All</Text>
+              style={styles.btn}>
+              <AntDesign name="delete" size={24} color="#fff" />
+              <Text style={styles.btnTxt}>Delete All</Text>
             </TouchableOpacity>
           )
         }
@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
   },
   delBtn: {
     backgroundColor: "red",
-    paddingVertical: 12,
+    paddingVertical: 10,
     paddingHorizontal: 30,
     borderRadius: 30
   },
@@ -100,6 +100,20 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "500",
     textAlign: "center"
-  }
+  },
+  btn: {
+    backgroundColor: '#2e86c1',
+    borderRadius: 40,
+    paddingHorizontal: 30,
+    paddingVertical: 15,
+    flexDirection:"row",
+    gap:10,
+    justifyContent:"center",
+    alignItems:"center"
+},
+btnTxt: {
+    color: "#fff",
+    fontSize: 16
+}
 
 })
