@@ -26,7 +26,6 @@ Ensure you have the following installed:
    ```
 2. Install EDU-LINK dependencies:
    ```sh
-   cd frontend
    npm install
    ```
 3. Start the EDU-LINK:
