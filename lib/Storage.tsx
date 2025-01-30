@@ -42,8 +42,11 @@ export const removeValue = async (key: string) => {
     console.log('Done.')
 }
 
-export const deleteByIndex = async (key: string, index: number) => {
+export const deleteByIndex = async (key: string, index: number | null) => {
     try {
+        if(index == null){
+            return
+        }
         const response = await getData(key);
 
         if (!Array.isArray(response)) {

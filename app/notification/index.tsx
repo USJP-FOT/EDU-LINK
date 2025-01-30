@@ -1,13 +1,14 @@
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 import NotifiCard from '@/components/NotifiCard'
-import { deleteByIndex, getData, removeValue } from '@/lib/Storage'
 import { FlatList } from 'react-native-gesture-handler'
 import AntDesign from '@expo/vector-icons/AntDesign';
 import { BottomSheetModal, BottomSheetModalProvider, BottomSheetView } from '@gorhom/bottom-sheet'
+import { useNotification } from '@/context/NotificationContext'
+import { deleteByIndex, removeValue } from '@/lib/Storage';
 
 const Notification = () => {
-  const [active, setActive] = useState<number>(0);
+  const {setNotificationList,} = useNotification()
   const snapPoints = ['30%']
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
 
@@ -15,59 +16,49 @@ const Notification = () => {
     bottomSheetModalRef.current?.present();
   }, []);
 
-  const handleClose = () => {
+  const handleDelete = () => {
     bottomSheetModalRef.current?.close();
+    removeValue("notification");
+    setNotificationList([]);
   };
 
-  const [notification, setNotification] = useState<any[]>([]);
 
-  const fetchNotification = async () => {
-    const response = await getData("notification") || [];
-    setNotification(response)
-  }
+  const { notificationList,select,setSelect } = useNotification();
 
-  const clearNotifications = () => {
-    removeValue("notification")
-    setNotification([])
-  }
-
-  const deleteNotication = (key:string,index:number) => {
-    deleteByIndex(key, index);
-    handleClose()
-  }
-
-  useEffect(() => {
-    fetchNotification()
-  }, [handleClose, clearNotifications])
+  useEffect(()=>{
+    deleteByIndex("notification",select)
+  },[setSelect])
 
   return (
     <View style={{ flex: 1 }}>
-      <View style={{ padding: 20 }}>
-        {
-          (notification?.length > 0) && (
-            <TouchableOpacity onPress={clearNotifications}
-              style={styles.btn}>
-              <AntDesign name="delete" size={24} color="#fff" />
-              <Text style={styles.btnTxt}>Delete All</Text>
-            </TouchableOpacity>
-          )
-        }
-      </View>
-      <FlatList data={notification} renderItem={({ item, index }) => {
+      <FlatList data={notificationList} renderItem={({ item, index }) => {
         const date = new Date(item.date);
         const { title, body, data } = item.request.content
         return (
-          <NotifiCard title={title} body={body} date={date.toLocaleDateString()} index={index} onPress={handlePresentModalPress} setActive={setActive} />
+          <NotifiCard title={title} body={body} date={date.toLocaleDateString()} index={index} onPress={handlePresentModalPress} />
         )
-      }} contentContainerStyle={styles.container} />
+      }} contentContainerStyle={styles.container} ListHeaderComponent={() => (
+        <View>
+          {
+            (notificationList?.length > 0) && (
+              <TouchableOpacity onPress={handleDelete}
+                style={styles.btn}>
+                <AntDesign name="delete" size={24} color="#fff" />
+                <Text style={styles.btnTxt}>Delete All</Text>
+              </TouchableOpacity>
+            )
+          }
+        </View>
+      )} />
 
       <BottomSheetModalProvider>
         <BottomSheetModal
           ref={bottomSheetModalRef}
           snapPoints={snapPoints}
         >
-          <BottomSheetView style={{ flex: 1, padding: 20}}>
-            <TouchableOpacity style={styles.delBtn} onPress={()=>deleteNotication("notification", active)}>
+          <BottomSheetView style={{ flex: 1, padding: 20 }}>
+            <TouchableOpacity style={styles.delBtn} onPress={() =>{}
+              }>
               <Text style={styles.delTxt}>Delete this notification</Text>
             </TouchableOpacity>
           </BottomSheetView>
@@ -106,14 +97,14 @@ const styles = StyleSheet.create({
     borderRadius: 40,
     paddingHorizontal: 30,
     paddingVertical: 15,
-    flexDirection:"row",
-    gap:10,
-    justifyContent:"center",
-    alignItems:"center"
-},
-btnTxt: {
+    flexDirection: "row",
+    gap: 10,
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  btnTxt: {
     color: "#fff",
     fontSize: 16
-}
+  }
 
 })

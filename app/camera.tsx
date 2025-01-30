@@ -5,7 +5,7 @@ import { Button, Image, SafeAreaView, StyleSheet, Text, TouchableOpacity, useWin
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import Entypo from '@expo/vector-icons/Entypo';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
-import { useCameraImage } from '@/context/cameraContext';
+import { useCameraImage } from '@/context/CameraContext';
 
 export default function Camera() {
     const { width } = useWindowDimensions();

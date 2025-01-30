@@ -1,50 +1,11 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { Link, router } from 'expo-router';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
-import { registerForPushNotificationsAsync, sendPushNotification } from '@/lib/PushNotification';
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
-import * as Notifications from 'expo-notifications';
-import { removeValue, storeData } from '@/lib/Storage';
-
-Notifications.setNotificationHandler({
-  handleNotification: async () => ({
-    shouldShowAlert: true,
-    shouldPlaySound: true,
-    shouldSetBadge: true,
-  }),
-});
 
 
 const App = () => {
-  const [expoPushToken, setExpoPushToken] = useState('');
-  const [notification, setNotification] = useState<Notifications.Notification | undefined>(
-    undefined
-  );
-  const notificationListener = useRef<Notifications.EventSubscription>();
-  const responseListener = useRef<Notifications.EventSubscription>();
-
-  useEffect(() => {
-    registerForPushNotificationsAsync()
-      .then(token => setExpoPushToken(token ?? ''))
-      .catch((error: any) => setExpoPushToken(`${error}`));
-
-    notificationListener.current = Notifications.addNotificationReceivedListener(async (notification) => {
-      setNotification(notification);
-      await storeData(notification,"notification");
-    });
-
-    responseListener.current = Notifications.addNotificationResponseReceivedListener(response => {
-      console.log(response);
-    });
-
-    return () => {
-      notificationListener.current &&
-        Notifications.removeNotificationSubscription(notificationListener.current);
-      responseListener.current &&
-        Notifications.removeNotificationSubscription(responseListener.current);
-    };
-  }, []);
 
   return (
     <View style={styles.container}>

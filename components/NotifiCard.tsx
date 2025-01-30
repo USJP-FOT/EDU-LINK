@@ -2,17 +2,19 @@ import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import React, { useState } from 'react'
 import { Link, router } from 'expo-router'
 import Entypo from '@expo/vector-icons/Entypo';
+import { useNotification } from '@/context/NotificationContext';
 
 type Prop = {
-    title: string,
-    date: string,
-    body: string,
+    title: string | null,
+    date: string | null,
+    body: string | null,
     index: number,
     onPress: () => void,
-    setActive: (index: number) => void
 }
 
-const NotifiCard = ({ title, date, body, index, onPress, setActive }: Prop) => {
+const NotifiCard = ({ title, date, body, index, onPress }: Prop) => {
+    const { setSelect } = useNotification();
+
     return (
         <TouchableOpacity style={styles.container} onPress={() => router.push(`/notification/${index}`)}>
 
@@ -24,9 +26,9 @@ const NotifiCard = ({ title, date, body, index, onPress, setActive }: Prop) => {
                 <Text style={styles.date}>{date}</Text>
             </View>
 
-            <TouchableOpacity style={styles.option} onPress={() => {
-                onPress()
-                setActive(index)
+            <TouchableOpacity style={styles.option} onPress={()=>{
+                setSelect(index);
+                onPress();
             }}>
                 <Entypo name="dots-three-horizontal" size={24} color="black" />
             </TouchableOpacity>

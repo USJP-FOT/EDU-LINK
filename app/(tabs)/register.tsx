@@ -9,7 +9,7 @@ import { Link } from 'expo-router'
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import Octicons from '@expo/vector-icons/Octicons';
 import * as ImagePicker from 'expo-image-picker';
-import { useCameraImage } from '@/context/cameraContext';
+import { useCameraImage } from '@/context/CameraContext';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 const create = () => {
