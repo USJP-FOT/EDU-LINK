@@ -35,7 +35,7 @@ const Notification = () => {
         const date = new Date(item.date);
         const { title, body, data } = item.request.content
         return (
-          <NotifiCard title={title} body={body} date={date.toLocaleDateString()} index={index} onPress={handlePresentModalPress} />
+          <NotifiCard title={title} body={body} dateTime={date.toLocaleString()} index={index} onPress={handlePresentModalPress} />
         )
       }} contentContainerStyle={styles.container} ListHeaderComponent={() => (
         <View>
@@ -57,9 +57,8 @@ const Notification = () => {
           snapPoints={snapPoints}
         >
           <BottomSheetView style={{ flex: 1, padding: 20 }}>
-            <TouchableOpacity style={styles.delBtn} onPress={() =>{}
-              }>
-              <Text style={styles.delTxt}>Delete this notification</Text>
+            <TouchableOpacity style={styles.delBtn} onPress={() =>deleteByIndex("notification",select)}>
+              <Text style={styles.delTxt}>Delete this notification {select}</Text>
             </TouchableOpacity>
           </BottomSheetView>
         </BottomSheetModal>

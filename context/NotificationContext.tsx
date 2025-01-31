@@ -39,6 +39,16 @@ interface NotificationProviderProps {
   children: ReactNode
 }
 
+
+Notifications.setNotificationHandler({
+  handleNotification: async () => ({
+    shouldShowAlert: true,
+    shouldPlaySound: true,
+    shouldSetBadge: true,
+  }),
+});
+
+
 export const NotificationProvider: React.FC<NotificationProviderProps> = ({ children }) => {
 
   const [expoPushToken, setExpoPushToken] = useState<string | null>(null);
@@ -66,8 +76,8 @@ export const NotificationProvider: React.FC<NotificationProviderProps> = ({ chil
     notificationListener.current =
       Notifications.addNotificationReceivedListener(async (notification) => {
         console.log("🔔 Notification Received: ", notification);
-        setNotification(notification);
         await storeData(notification, "notification");
+        setNotification(notification);
       });
 
 
@@ -87,7 +97,7 @@ export const NotificationProvider: React.FC<NotificationProviderProps> = ({ chil
 
   useEffect(() => {
     if (notification) {
-      setNotificationList([...notificationList, notification])
+      setNotificationList([ notification,...notificationList])
     }
   }, [notification])
 

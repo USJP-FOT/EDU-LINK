@@ -6,7 +6,7 @@ import { getData } from '@/lib/Storage'
 const DisplayNotification = () => {
   const [title, setTitle] = useState("")
   const [bodyTxt, setBodyTxt] = useState("")
-  const [date, setDate] = useState("")
+  const [dateTime, setDateTime] = useState("")
 
   useEffect(() => {
     fetchNotification()
@@ -17,12 +17,14 @@ const DisplayNotification = () => {
   const fetchNotification = async () => {
     const response = await getData("notification");
     const notification = response[Number.parseInt(id[0])]
-    const date = new Date(notification.date).toLocaleDateString()
+    const dateTime = new Date(notification.date).toLocaleString()
     const { title, body, data } = notification.request.content
     setTitle(title)
     setBodyTxt(body)
-    setDate(date)
+    setDateTime(dateTime)
   }
+
+  const [date, time] = dateTime?.split(",") || ["", ""];
 
   return (
     <View style={styles.container}>
@@ -30,7 +32,10 @@ const DisplayNotification = () => {
       <Text style={styles.description}>
         {bodyTxt}
       </Text>
-      <Text style={styles.date}>{date}</Text>
+      <View style={{ flexDirection: "row", gap: 15, marginTop: 10 }}>
+        <Text style={styles.dateTime}>{time}</Text>
+        <Text style={styles.dateTime}>{date}</Text>
+      </View>
     </View>
   )
 }
@@ -44,15 +49,17 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 28,
     fontWeight: "500",
-    marginBottom:10
+    marginBottom: 10
   },
   description: {
     fontSize: 20,
-    opacity:0.8
+    opacity: 0.9
   },
-  date:{
-    fontSize:16,
-    marginTop:15
+  dateTime: {
+    fontSize: 16,
+    marginTop: 15,
+    fontWeight:"500",
+    opacity:0.7
   }
 })
 

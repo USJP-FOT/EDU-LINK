@@ -6,13 +6,15 @@ import { useNotification } from '@/context/NotificationContext';
 
 type Prop = {
     title: string | null,
-    date: string | null,
+    dateTime: string | null,
     body: string | null,
     index: number,
     onPress: () => void,
 }
 
-const NotifiCard = ({ title, date, body, index, onPress }: Prop) => {
+const NotifiCard = ({ title, dateTime, body, index, onPress }: Prop) => {
+    
+    const [date, time] = dateTime?.split(",") || ["", ""];
     const { setSelect } = useNotification();
 
     return (
@@ -23,10 +25,13 @@ const NotifiCard = ({ title, date, body, index, onPress }: Prop) => {
                 <Text style={styles.description} numberOfLines={1}>
                     {body}
                 </Text>
-                <Text style={styles.date}>{date}</Text>
+                <View style={{flexDirection:"row",gap:15,marginTop:10}}>
+                    <Text style={styles.dateTime}>{time}</Text>
+                    <Text style={styles.dateTime}>{date}</Text>
+                </View>
             </View>
 
-            <TouchableOpacity style={styles.option} onPress={()=>{
+            <TouchableOpacity style={styles.option} onPress={() => {
                 setSelect(index);
                 onPress();
             }}>
@@ -60,7 +65,7 @@ const styles = StyleSheet.create({
     description: {
         fontSize: 16,
     },
-    date: {
+    dateTime: {
         fontSize: 14,
         opacity: 0.6,
         fontWeight: "600",
