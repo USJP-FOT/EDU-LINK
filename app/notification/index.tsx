@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity, Alert } from 'react-native'
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 import NotifiCard from '@/components/NotifiCard'
 import { FlatList } from 'react-native-gesture-handler'
@@ -10,26 +10,37 @@ import { deleteByIndex, removeValue } from '@/lib/Storage';
 const Notification = () => {
   const snapPoints = ['30%']
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
-  const { notificationList,select,setNotificationList } = useNotification();
+  const { notificationList, select, setNotificationList } = useNotification();
 
   const handlePresentModalPress = useCallback(() => {
     bottomSheetModalRef.current?.present();
   }, []);
 
   const deleteAll = () => {
-    bottomSheetModalRef.current?.close();
-    removeValue("notification");
-    setNotificationList([]);
+    Alert.alert("Warning!", "Are you want delete all notifications?", [
+      {
+        text: 'Cancel',
+        onPress: () => {},
+        style: 'cancel',
+      },
+      {
+        text: 'OK', onPress: () => {
+          removeValue("notification");
+          setNotificationList([]);
+        }
+      },
+    ])
+
   };
 
 
   const deleteNotification = () => {
-    if(select == null){
+    if (select == null) {
       return
     }
-    const tempArray = notificationList.splice(select,1);
+    const tempArray = notificationList.splice(select, 1);
     setNotificationList([...notificationList]);
-    deleteByIndex("notification",select);
+    deleteByIndex("notification", select);
     bottomSheetModalRef.current?.close();
   }
 
