@@ -1,8 +1,6 @@
-import { View, Text, ScrollView, TextInput, StyleSheet, SafeAreaView, TouchableOpacity } from 'react-native'
+import { View, Text, ScrollView, TextInput, StyleSheet,TouchableOpacity, KeyboardAvoidingView } from 'react-native'
 import React, { useEffect, useState } from 'react'
-import { data } from '../data'
 import FontAwesome5 from '@expo/vector-icons/FontAwesome5'
-import { Stack } from 'expo-router'
 
 const attendance = () => {
 
@@ -16,13 +14,49 @@ const attendance = () => {
       id: "TE110432"
     },
     {
+      name: "UDARA D.G.C",
+      id: "TE110432"
+    },
+    {
+      name: "UDARA D.G.C",
+      id: "TE110432"
+    },
+    {
+      name: "UDARA D.G.C",
+      id: "TE110432"
+    },
+    {
+      name: "UDARA D.G.C",
+      id: "TE110432"
+    },
+    {
+      name: "UDARA D.G.C",
+      id: "TE110432"
+    },
+    {
+      name: "UDARA D.G.C",
+      id: "TE110432"
+    },
+    {
+      name: "UDARA D.G.C",
+      id: "TE110432"
+    },
+    {
+      name: "UDARA D.G.C",
+      id: "TE110432"
+    },
+    {
+      name: "UDARA D.G.C",
+      id: "TE110432"
+    },
+    {
       name: "THARAKA R.D",
       id: "TE110338"
     }
   ]);
 
   return (
-    <SafeAreaView style={{ padding: 10, flex: 1,gap:10 }}>
+    <KeyboardAvoidingView style={{ padding: 10, flex: 1,gap:10 }}>
       
       <View style={{ backgroundColor: '#2e86c1', borderRadius: 60, flexDirection: 'row', gap: 15, alignItems: 'center', paddingRight: 15, overflow: 'hidden' }}>
         <TextInput style={{ fontSize: 16, padding: 12, flex: 1, backgroundColor: '#fff', borderTopLeftRadius: 60, borderBottomLeftRadius: 60, borderWidth: 0 }} placeholder='Search...' />
@@ -31,7 +65,7 @@ const attendance = () => {
         </TouchableOpacity>
       </View>
 
-      <ScrollView style={{ flex: 1, borderRadius: 15, backgroundColor: '#fff', padding: 10 }} showsVerticalScrollIndicator={false}>
+      <ScrollView style={{flex:1, borderRadius: 15, backgroundColor: '#fff'}} showsVerticalScrollIndicator={false} contentContainerStyle={{padding:10}}>
         {
           students.map((item, index) => (
             <View key={index} style={[{ flex: 1, flexDirection: "row", justifyContent: "space-between", alignItems: 'center', padding: 10, gap: 20 }, students.length - 1 != index && { borderBottomWidth: 1, borderColor: '#f5f5f5' }]}>
@@ -62,7 +96,7 @@ const attendance = () => {
           ))
         }
       </ScrollView>
-    </SafeAreaView>
+    </KeyboardAvoidingView>
   )
 }
 

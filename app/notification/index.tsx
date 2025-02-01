@@ -8,26 +8,30 @@ import { useNotification } from '@/context/NotificationContext'
 import { deleteByIndex, removeValue } from '@/lib/Storage';
 
 const Notification = () => {
-  const {setNotificationList,} = useNotification()
   const snapPoints = ['30%']
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
+  const { notificationList,select,setNotificationList } = useNotification();
 
   const handlePresentModalPress = useCallback(() => {
     bottomSheetModalRef.current?.present();
   }, []);
 
-  const handleDelete = () => {
+  const deleteAll = () => {
     bottomSheetModalRef.current?.close();
     removeValue("notification");
     setNotificationList([]);
   };
 
 
-  const { notificationList,select,setSelect } = useNotification();
-
-  useEffect(()=>{
-    deleteByIndex("notification",select)
-  },[setSelect])
+  const deleteNotification = () => {
+    if(select == null){
+      return
+    }
+    const tempArray = notificationList.splice(select,1);
+    setNotificationList([...notificationList]);
+    deleteByIndex("notification",select);
+    bottomSheetModalRef.current?.close();
+  }
 
   return (
     <View style={{ flex: 1 }}>
@@ -41,7 +45,7 @@ const Notification = () => {
         <View>
           {
             (notificationList?.length > 0) && (
-              <TouchableOpacity onPress={handleDelete}
+              <TouchableOpacity onPress={deleteAll}
                 style={styles.btn}>
                 <AntDesign name="delete" size={24} color="#fff" />
                 <Text style={styles.btnTxt}>Delete All</Text>
@@ -57,8 +61,8 @@ const Notification = () => {
           snapPoints={snapPoints}
         >
           <BottomSheetView style={{ flex: 1, padding: 20 }}>
-            <TouchableOpacity style={styles.delBtn} onPress={() =>deleteByIndex("notification",select)}>
-              <Text style={styles.delTxt}>Delete this notification {select}</Text>
+            <TouchableOpacity style={styles.delBtn} onPress={deleteNotification}>
+              <Text style={styles.delTxt}>Delete this notification</Text>
             </TouchableOpacity>
           </BottomSheetView>
         </BottomSheetModal>

@@ -39,7 +39,6 @@ export const removeValue = async (key: string) => {
     } catch (e) {
         console.log(e)
     }
-    console.log('Done.')
 }
 
 export const deleteByIndex = async (key: string, index: number | null) => {
