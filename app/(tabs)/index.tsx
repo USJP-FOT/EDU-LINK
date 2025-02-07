@@ -3,21 +3,25 @@ import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { Link, router } from 'expo-router';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
-
+import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 
 const App = () => {
 
   return (
     <View style={styles.container}>
 
-      <View style={styles.card}>
+      <TouchableOpacity style={styles.btn} onPress={() =>{}}>
+        <FontAwesome5 name="lock-open" size={24} color="#fff" />
+        <Text style={styles.btnTxt}>UNLOCK</Text>
+      </TouchableOpacity>
 
+      <View style={styles.card}>
         <View>
           <Link href={"/attendance"}>
             <AnimatedCircularProgress
               size={120}
               width={12}
-              fill={78}
+              fill={45}
               tintColor="#2ecc71"
               onAnimationComplete={() => console.log('onAnimationComplete')}
               backgroundColor="#e5e7e9">
@@ -72,7 +76,7 @@ const styles = StyleSheet.create({
   btn: {
     backgroundColor: "#2e86c1",
     paddingVertical: 15,
-    paddingHorizontal:35,
+    paddingHorizontal: 35,
     flexDirection: "row",
     gap: 10,
     justifyContent: "center",
@@ -87,7 +91,7 @@ const styles = StyleSheet.create({
   card: {
     flexDirection: "row",
     gap: 20,
-    marginBottom: 20,
+    marginVertical: 20,
     backgroundColor: "#fff",
     padding: 20,
     borderRadius: 15,

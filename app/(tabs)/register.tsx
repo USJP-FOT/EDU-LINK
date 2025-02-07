@@ -40,48 +40,47 @@ const create = () => {
 
   const snapPoints = ['30%']
   return (
-    <SafeAreaView style={{ flex: 1 }}>
       <ScrollView contentContainerStyle={{ padding: 20 }} showsVerticalScrollIndicator={false}>
         <KeyboardAvoidingView style={{ flex: 1, gap: 20 }} behavior={undefined}>
 
-          <View style={{ flex: 1, flexDirection: "row", flexWrap: "wrap", justifyContent: "center", gap: 15 }}>
-            <View style={{ width: 150, height: 150, borderRadius: 200, backgroundColor: '#fff', alignSelf: 'center', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', position: 'relative' }}>
+          <View style={{ flex: 1, flexDirection: "row", flexWrap: "wrap", justifyContent:"space-between", gap: 15 }}>
+            <View style={{ width: 90, height: 90, borderRadius: 200, backgroundColor: '#fff', alignSelf: 'center', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', position: 'relative' }}>
               {
                 imageLeft ?
-                  <Image source={{ uri: imageLeft }} style={{ width: 140, height: 140, borderRadius: 70 }} />
+                  <Image source={{ uri: imageLeft }} style={{ width: 80, height: 80, borderRadius: 70 }} />
                   :
-                  <View style={{ width: 140, height: 140, flexDirection: 'column', borderRadius: 90, justifyContent: 'center', alignItems: 'center', backgroundColor: "#2e86c1" }}>
-                    <MaterialCommunityIcons name="camera" size={50} color="#fff" />
+                  <View style={{ width: 80, height: 80, flexDirection: 'column', borderRadius: 90, justifyContent: 'center', alignItems: 'center', backgroundColor: "#2e86c1" }}>
+                    <MaterialCommunityIcons name="camera" size={30} color="#fff" />
                   </View>
               }
-              <TouchableOpacity onPress={() => pickImage("left")} style={{ position: 'absolute', bottom: 0, right: 20, backgroundColor: "gray", padding: 5, borderRadius: 30 }}>
-                <MaterialCommunityIcons name="camera" size={24} color="white" />
+              <TouchableOpacity onPress={() => pickImage("left")} style={{ position: 'absolute', bottom: 0, right: 0, backgroundColor: "gray", padding: 5, borderRadius: 30 }}>
+                <MaterialCommunityIcons name="camera" size={30} color="white" />
               </TouchableOpacity>
             </View>
-            <View style={{ width: 150, height: 150, borderRadius: 200, backgroundColor: '#fff', alignSelf: 'center', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', position: 'relative' }}>
+            <View style={{ width: 90, height: 90, borderRadius: 200, backgroundColor: '#fff', alignSelf: 'center', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', position: 'relative' }}>
               {
                 imageCenter ?
-                  <Image source={{ uri: imageCenter }} style={{ width: 140, height: 140, borderRadius: 70 }} />
+                  <Image source={{ uri: imageCenter }} style={{ width: 80, height: 80, borderRadius: 70 }} />
                   :
-                  <View style={{ width: 140, height: 140, flexDirection: 'row', borderRadius: 90, justifyContent: 'center', alignItems: 'center', backgroundColor: "#2e86c1" }}>
-                    <MaterialCommunityIcons name="camera" size={50} color="#fff" />
+                  <View style={{ width: 80, height: 80, flexDirection: 'row', borderRadius: 90, justifyContent: 'center', alignItems: 'center', backgroundColor: "#2e86c1" }}>
+                    <MaterialCommunityIcons name="camera" size={30} color="#fff" />
                   </View>
               }
-              <TouchableOpacity onPress={() => pickImage("center")} style={{ position: 'absolute', bottom: 0, right: 20, backgroundColor: "gray", padding: 5, borderRadius: 30 }}>
-                <MaterialCommunityIcons name="camera" size={24} color="white" />
+              <TouchableOpacity onPress={() => pickImage("center")} style={{ position: 'absolute', bottom: 0, right: 0, backgroundColor: "gray", padding: 5, borderRadius: 30 }}>
+                <MaterialCommunityIcons name="camera" size={30} color="white" />
               </TouchableOpacity>
             </View>
-            <View style={{ width: 150, height: 150, borderRadius: 200, backgroundColor: '#fff', alignSelf: 'center', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', position: 'relative' }}>
+            <View style={{ width: 90, height: 90, borderRadius: 200, backgroundColor: '#fff', alignSelf: 'center', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', position: 'relative' }}>
               {
                 imageRight ?
-                  <Image source={{ uri: imageRight }} style={{ width: 140, height: 140, borderRadius: 70 }} />
+                  <Image source={{ uri: imageRight }} style={{ width: 80, height: 80, borderRadius: 70 }} />
                   :
-                  <View style={{ width: 140, height: 140, flexDirection: 'row', borderRadius: 90, justifyContent: 'center', alignItems: 'center', backgroundColor: "#2e86c1" }}>
-                    <MaterialCommunityIcons name="camera" size={50} color="#fff" />
+                  <View style={{ width: 80, height: 80, flexDirection: 'row', borderRadius: 90, justifyContent: 'center', alignItems: 'center', backgroundColor: "#2e86c1" }}>
+                    <MaterialCommunityIcons name="camera" size={30} color="#fff" />
                   </View>
               }
-              <TouchableOpacity onPress={() => pickImage("right")} style={{ position: 'absolute', bottom: 0, right: 20, backgroundColor: "gray", padding: 5, borderRadius: 30 }}>
-                <MaterialCommunityIcons name="camera" size={24} color="white" />
+              <TouchableOpacity onPress={() => pickImage("right")} style={{ position: 'absolute', bottom: 0, right: 0, backgroundColor: "gray", padding: 5, borderRadius: 30 }}>
+                <MaterialCommunityIcons name="camera" size={30} color="white" />
               </TouchableOpacity>
             </View>
           </View>
@@ -97,8 +96,6 @@ const create = () => {
         </TouchableOpacity>
 
       </ScrollView>
-
-    </SafeAreaView>
   )
 }
 
