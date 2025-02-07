@@ -12,7 +12,7 @@
       "supportsTablet": true
     },
     "android": {
-      "googleServicesFile": "./google-services.json",
+      "googleServicesFile": "./google-service.json",
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
@@ -52,13 +52,8 @@
       [
         "expo-notifications",
         {
-          "icon": "./local/assets/notification_icon.png",
           "color": "#ffffff",
           "defaultChannel": "default",
-          "sounds": [
-            "./local/assets/notification_sound.wav",
-            "./local/assets/notification_sound_other.wav"
-          ],
           "enableBackgroundRemoteNotifications": true
         }
       ]

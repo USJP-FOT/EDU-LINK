@@ -3,8 +3,6 @@ import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import React, { useEffect } from 'react';
 import 'react-native-reanimated';
-
-import CameraProvider from '@/context/CameraContext';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { NotificationProvider } from '@/context/NotificationContext';
 
@@ -28,17 +26,14 @@ export default function RootLayout() {
 
   return (
     <NotificationProvider>
-      <CameraProvider>
         <GestureHandlerRootView style={{ flex: 1 }}>
           <Stack screenOptions={{ headerShown: false, headerTitleAlign: "center", statusBarStyle: "dark" }}>
             <Stack.Screen name="(tabs)" />
             <Stack.Screen name="notice" options={{ headerShown: true, title: "Send Notice" }} />
             <Stack.Screen name="notification" options={{ headerShown: false }} />
             <Stack.Screen name="attendance" options={{ headerShown: true, title: "Attendance" }} />
-            <Stack.Screen name="camera" options={{ headerShown: true, title: "Take a Picture" }} />
           </Stack>
         </GestureHandlerRootView>
-      </CameraProvider>
     </NotificationProvider>
   );
 }
