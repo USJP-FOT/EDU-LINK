@@ -4,56 +4,52 @@ import FontAwesome5 from '@expo/vector-icons/FontAwesome5'
 
 const attendance = () => {
 
-  const [students, setStudents] = useState<any[]>([
-    {
-      name: "JAYAMAL A.T",
-      id: "TE110372"
-    },
-    {
-      name: "UDARA D.G.C",
-      id: "TE110432"
-    },
-    {
-      name: "UDARA D.G.C",
-      id: "TE110432"
-    },
-    {
-      name: "UDARA D.G.C",
-      id: "TE110432"
-    },
-    {
-      name: "UDARA D.G.C",
-      id: "TE110432"
-    },
-    {
-      name: "UDARA D.G.C",
-      id: "TE110432"
-    },
-    {
-      name: "UDARA D.G.C",
-      id: "TE110432"
-    },
-    {
-      name: "UDARA D.G.C",
-      id: "TE110432"
-    },
-    {
-      name: "UDARA D.G.C",
-      id: "TE110432"
-    },
-    {
-      name: "UDARA D.G.C",
-      id: "TE110432"
-    },
-    {
-      name: "UDARA D.G.C",
-      id: "TE110432"
-    },
-    {
-      name: "THARAKA R.D",
-      id: "TE110338"
+  const [students, setStudents] = useState<any[]>([]);
+
+  useEffect(() => {
+    getData();
+  }, [])
+
+  const getData = async () => {
+    try {
+      const response = await fetch("https://iinndduummaa.serveo.net/student/all");
+      const data = await response.json();
+      console.log(data)
+      setStudents(data)
+      if (!response.ok) {
+        console.log("Can't fetch data")
+      }
     }
-  ]);
+    catch (error) {
+      console.log(error)
+    }
+
+  }
+
+  const socket = new WebSocket('ws://172.177.169.18:8887');
+
+  socket.onopen = function (event) {
+    console.log('Connection opened');
+  };
+
+  socket.onmessage = async (event) => {
+    const student = await JSON.parse(event.data);
+    const isStudentExist = students.find((item) => item.id == student.id);
+
+    if (!isStudentExist) {
+      setStudents([...students, student]);
+    }
+
+  };
+
+  socket.onclose = function (event) {
+    console.log('Connection closed: ', event);
+  };
+
+  socket.onerror = function (error) {
+    console.error('WebSocket error: ', error);
+  };
+
 
   return (
     <KeyboardAvoidingView style={{ padding: 10, flex: 1,gap:10 }}>

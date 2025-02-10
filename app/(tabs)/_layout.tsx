@@ -34,6 +34,13 @@ export default function TabLayout() {
       }}
     />
     <Tabs.Screen
+      name="locker"
+      options={{
+        title: 'Locker',
+        tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="locker" size={size} color={color} />,
+      }}
+    />
+    <Tabs.Screen
       name="register"
       options={{
         title: 'Student Registration',

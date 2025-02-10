@@ -3,17 +3,23 @@ import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { Link, router } from 'expo-router';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
-import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 
 const App = () => {
 
+  const get = async () => {
+    try {
+        const response = await fetch('http://172.177.169.18:8080/locker/all');
+        if (response.ok) {
+            const data = await response.json();
+            console.log(data);
+        }
+    } catch (error) {
+        console.error('Error:', error);
+    }
+};
+
   return (
     <View style={styles.container}>
-
-      <TouchableOpacity style={styles.btn} onPress={() =>{}}>
-        <FontAwesome5 name="lock-open" size={24} color="#fff" />
-        <Text style={styles.btnTxt}>UNLOCK</Text>
-      </TouchableOpacity>
 
       <View style={styles.card}>
         <View>

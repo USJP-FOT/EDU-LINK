@@ -1,4 +1,4 @@
-import { View, Text, TextInput, StyleSheet, KeyboardAvoidingView } from 'react-native'
+import { View, Text, TextInput, StyleSheet, KeyboardAvoidingView, Alert } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { TouchableOpacity } from '@gorhom/bottom-sheet'
 import { useLocalSearchParams } from 'expo-router'
@@ -8,42 +8,76 @@ import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 const addNotice = () => {
     const [title, setTitle] = useState("");
     const [description, setDiscription] = useState("");
+    const [loading, setLoading] = useState(false);
 
-    const clearAll = () =>{
+    const clearAll = () => {
         setDiscription("")
         setTitle("")
     }
 
-    return (
-            <KeyboardAvoidingView style={styles.container} behavior={undefined}>
-                <View style={{width:"100%",gap:15}}>
-                    <TextInput
-                        placeholder='Title'
-                        style={styles.title}
-                        value={title}
-                        onChangeText={setTitle}
-                    />
-                    <TextInput
-                        multiline
-                        numberOfLines={10}
-                        placeholder='Type here...'
-                        value={description}
-                        onChangeText={setDiscription}
-                        style={styles.content}
+    const sendData = async () => {
+        setLoading(true)
+        const myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+        const raw = JSON.stringify({
+            title: title,
+            description: description
+        });
 
-                    />
-                </View>
-                <View style={styles.btnGroup}>
-                    <TouchableOpacity style={styles.btn}>
-                        <FontAwesome name="send-o" size={24} color="#fff" />
-                        <Text style={styles.btnTxt}>SEND</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.btn} onPress={clearAll}>
+        fetch("http://172.177.169.18:8080/announcement/add", {
+            method: "POST",
+            headers: myHeaders,
+            body: raw,
+            redirect: "follow"
+        })
+            .then((result) => {
+                setLoading(false)
+                if (result.ok) {
+                    Alert.alert("Send successfully!")
+                }
+            })
+            .catch((error) => {
+                console.error(error)
+                Alert.alert("Error: Try again later ): ")
+                setLoading(false)
+            })
+    }
+
+    return (
+        <KeyboardAvoidingView style={styles.container} behavior={undefined}>
+            <View style={{ width: "100%", gap: 15 }}>
+                <TextInput
+                    placeholder='Title'
+                    style={styles.title}
+                    value={title}
+                    onChangeText={setTitle}
+                />
+                <TextInput
+                    multiline
+                    numberOfLines={10}
+                    placeholder='Type here...'
+                    value={description}
+                    onChangeText={setDiscription}
+                    style={styles.content}
+
+                />
+            </View>
+            <View style={styles.btnGroup}>
+                <TouchableOpacity style={styles.btn} disabled={loading} onPress={sendData}>
+                    <FontAwesome name="send-o" size={24} color="#fff" />
+                    {
+                        loading ?
+                            <Text style={styles.btnTxt}>SENDING...</Text>
+                            :
+                            <Text style={styles.btnTxt}>SEND</Text>
+                    }
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.btn} onPress={clearAll}>
                     <MaterialCommunityIcons name="eraser" size={24} color="#fff" />
-                        <Text style={styles.btnTxt}>CLEAR</Text>
-                    </TouchableOpacity>
-                </View>
-            </KeyboardAvoidingView>
+                    <Text style={styles.btnTxt}>CLEAR</Text>
+                </TouchableOpacity>
+            </View>
+        </KeyboardAvoidingView>
     )
 }
 
@@ -66,7 +100,7 @@ const styles = StyleSheet.create({
     content: {
         backgroundColor: "#fff",
         height: 200,
-        padding:10,
+        padding: 10,
         textAlignVertical: 'top',
         borderRadius: 15,
         fontSize: 16
@@ -76,6 +110,7 @@ const styles = StyleSheet.create({
     },
     btnGroup: {
         flexDirection: 'row',
+        flexWrap: 'wrap',
         gap: 20,
         marginTop: 20,
     },
@@ -84,10 +119,10 @@ const styles = StyleSheet.create({
         borderRadius: 40,
         paddingHorizontal: 30,
         paddingVertical: 15,
-        flexDirection:"row",
-        gap:10,
-        justifyContent:"center",
-        alignItems:"center"
+        flexDirection: "row",
+        gap: 10,
+        justifyContent: "center",
+        alignItems: "center"
     },
     btnTxt: {
         color: "#fff",
