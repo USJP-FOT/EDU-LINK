@@ -32,6 +32,7 @@ export default function RootLayout() {
             <Stack.Screen name="notice" options={{ headerShown: true, title: "Send Notice" }} />
             <Stack.Screen name="notification" options={{ headerShown: false }} />
             <Stack.Screen name="attendance" options={{ headerShown: true, title: "Attendance" }} />
+            <Stack.Screen name="addLocker" options={{ headerShown: true, title: "Add Locker" }} />
           </Stack>
         </GestureHandlerRootView>
     </NotificationProvider>
